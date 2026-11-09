@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+/* Design tokens: 60 / 30 / 10 (docs/plan.md §3). Ivory is the ground,
+   charcoal carries type, oxblood is reserved for primary actions. */
+:root {
+  --color-ivory: #f5f2ec;
+  --color-charcoal: #292c29;
+  --color-oxblood: #792e3a;
+  --color-paper: #fcfaf6;
+  --color-muted: #6d6a63;
+  --color-line: #d9d4ca;
+}
+
+@theme inline {
+  --color-ivory: var(--color-ivory);
+  --color-charcoal: var(--color-charcoal);
+  --color-oxblood: var(--color-oxblood);
+  --color-paper: var(--color-paper);
+  --color-muted: var(--color-muted);
+  --color-line: var(--color-line);
+
+  --font-display: var(--font-newsreader), Georgia, serif;
+  --font-sans: var(--font-manrope), system-ui, sans-serif;
+
+  --radius-sm: 2px;
+  --radius-md: 6px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+  --duration-slow: 350ms;
+}
+
+html {
+  background: var(--color-ivory);
+  color: var(--color-charcoal);
+}
+
+body {
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-oxblood);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

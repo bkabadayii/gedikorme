@@ -1,0 +1,44 @@
+{
+  "name": "gedik-orme",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "dev:vinext": "vite dev --port 3001",
+    "build:vinext": "vite build",
+    "start:vinext": "vite preview",
+    "deploy:vinext": "vinext-cloudflare deploy",
+    "typecheck": "next typegen && tsc --noEmit",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "check": "npm run lint && npm run typecheck && npm run test && npm run build:vinext"
+  },
+  "dependencies": {
+    "@vinext/cloudflare": "^1.3.3",
+    "next": "16.4.6",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-server-dom-webpack": "^19.3.1",
+    "vinext": "^1.4.4"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^2.0.0-beta.v.13",
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^22.20.5",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@vitejs/plugin-react": "^6.3.0",
+    "@vitejs/plugin-rsc": "^0.5.39",
+    "cf": "^1.0.0-beta.28",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.6",
+    "tailwindcss": "4.3.3",
+    "typescript": "^5",
+    "vite": "^8.3.0",
+    "vitest": "^5.1.0"
+  },
+  "type": "module"
+}

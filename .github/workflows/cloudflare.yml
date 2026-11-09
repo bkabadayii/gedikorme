@@ -1,0 +1,77 @@
+name: CI and Cloudflare deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: cloudflare-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run build:vinext
+
+  # main -> production Worker (workers.dev). Needs the two repository secrets.
+  deploy:
+    needs: check
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run deploy:vinext
+
+  # PRs from this repo -> uploaded as a non-promoted Worker version, reachable
+  # at its preview URL; production traffic is untouched. Fork PRs get no secrets.
+  preview:
+    needs: check
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Upload preview version (not promoted)
+        run: npm run deploy:vinext -- --no-promote 2>&1 | tee deploy.log
+      - name: Comment preview URL
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          url=$(grep -oE 'https://[A-Za-z0-9._-]+\.workers\.dev[^ ]*' deploy.log | tail -1 || true)
+          if [ -n "$url" ]; then
+            body="Preview: $url"
+          else
+            body="Preview version uploaded. URL not found in deploy output; see the workflow log."
+          fi
+          gh pr comment "${{ github.event.pull_request.number }}" --body "$body"

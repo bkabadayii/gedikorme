@@ -1,0 +1,8 @@
+import { fileURLToPath } from "node:url";
+import { defineConfig } from "vitest/config";
+
+// Separate from vite.config.ts so tests don't boot the Cloudflare/RSC plugins.
+export default defineConfig({
+  resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },
+  test: { include: ["src/**/*.test.ts"] },
+});
