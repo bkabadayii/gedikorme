@@ -1,57 +1,99 @@
 @import "tailwindcss";
 
-/* Design tokens: 60 / 30 / 10 (docs/plan.md §3). Ivory is the ground,
-   charcoal carries type, oxblood is reserved for primary actions. */
+/* Numune Masası: pale stone desk, ivory sample cards, ink type, brass hairlines.
+   Fabric colour is the only saturation on the page. */
 :root {
-  --color-ivory: #f5f2ec;
-  --color-charcoal: #292c29;
-  --color-oxblood: #792e3a;
-  --color-paper: #fcfaf6;
-  --color-muted: #6d6a63;
-  --color-line: #d9d4ca;
+  --color-stone: #e6e1d8;
+  --color-card: #faf8f3;
+  --color-ink: #23211e;
+  --color-brass: #6f5524;
+  --color-brass-line: #b69a63;
+  --color-muted: #5b5750;
+  --color-line: #cfc8ba;
 }
 
 @theme inline {
-  --color-ivory: var(--color-ivory);
-  --color-charcoal: var(--color-charcoal);
-  --color-oxblood: var(--color-oxblood);
-  --color-paper: var(--color-paper);
+  --color-stone: var(--color-stone);
+  --color-card: var(--color-card);
+  --color-ink: var(--color-ink);
+  --color-brass: var(--color-brass);
+  --color-brass-line: var(--color-brass-line);
   --color-muted: var(--color-muted);
   --color-line: var(--color-line);
 
-  --font-display: var(--font-newsreader), Georgia, serif;
-  --font-sans: var(--font-manrope), system-ui, sans-serif;
-
-  --radius-sm: 2px;
-  --radius-md: 6px;
+  --font-display: var(--font-bodoni), "Bodoni 72", Didot, serif;
+  --font-sans: var(--font-jost), system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --duration-fast: 150ms;
-  --duration-base: 250ms;
-  --duration-slow: 350ms;
 }
 
 html {
-  background: var(--color-ivory);
-  color: var(--color-charcoal);
+  background: #e2ddd3;
+  color: var(--color-ink);
 }
-
 body {
   font-family: var(--font-sans);
   text-rendering: optimizeLegibility;
+  position: relative;
 }
+::selection { background: var(--color-brass-line); color: var(--color-ink); }
+:focus-visible { outline: 2px solid var(--color-brass); outline-offset: 3px; }
 
-:focus-visible {
-  outline: 2px solid var(--color-oxblood);
-  outline-offset: 3px;
+.label {
+  font-size: 0.75rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+.hairline-frame::after {
+  content: ""; position: absolute; inset: 7px; pointer-events: none;
+  border: 1px solid var(--color-brass-line); opacity: 0.85;
+}
+.pinked { clip-path: polygon(0 2%,4% 0,8% 2%,12% 0,16% 2%,20% 0,24% 2%,28% 0,32% 2%,36% 0,40% 2%,44% 0,48% 2%,52% 0,56% 2%,60% 0,64% 2%,68% 0,72% 2%,76% 0,80% 2%,84% 0,88% 2%,92% 0,96% 2%,100% 0,100% 100%,0 100%); }
+.knit-swatch {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2214%22 height=%2216%22 viewBox=%220 0 14 16%22%3E%3Cdefs%3E%3ClinearGradient id=%22a%22 x1=%220%22 y1=%220%22 x2=%221%22 y2=%220%22%3E%3Cstop offset=%220%22 stop-color=%22%23000%22 stop-opacity=%22.38%22/%3E%3Cstop offset=%22.45%22 stop-color=%22%23fff%22 stop-opacity=%22.5%22/%3E%3Cstop offset=%221%22 stop-color=%22%23000%22 stop-opacity=%22.3%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%2214%22 height=%2216%22 fill=%22%23808080%22/%3E%3Cpath d=%22M1 1 L7 12 L13 1%22 fill=%22none%22 stroke=%22url%28%23a%29%22 stroke-width=%223.2%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22/%3E%3Cpath d=%22M1 9 L7 20 M13 9 L7 20%22 fill=%22none%22 stroke=%22url%28%23a%29%22 stroke-width=%223.2%22 stroke-linecap=%22round%22/%3E%3Cpath d=%22M1 -7 L7 4 L13 -7%22 fill=%22none%22 stroke=%22url%28%23a%29%22 stroke-width=%223.2%22 stroke-linecap=%22round%22/%3E%3C/svg%3E");
+  background-size: 14px 16px;
+  background-blend-mode: overlay;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+.desk-card {
+  box-shadow: 0 30px 50px -18px rgba(60, 50, 30, 0.35);
+  transform-style: preserve-3d;
+  transition: transform 500ms var(--ease-out);
+  --lift: 0px;
+  transform: rotateX(calc(var(--rx0) + var(--rx))) rotateY(calc(var(--ry0) + var(--ry)))
+    rotateZ(var(--r)) translateZ(var(--lift));
+}
+.desk-card:hover, .desk-card:focus-visible { --lift: 40px; z-index: 10; }
+.desk { perspective: 1600px; --rx: 0deg; --ry: 0deg; --desk-ratio: 1 / 1.2; }
+@media (min-width: 768px) { .desk { --desk-ratio: 6 / 5; } }
+
+/* Corner peel: the sample lifts its bottom-right corner on hover or focus. */
+.desk-card::before {
+  content: ""; position: absolute; right: 0; bottom: 0; width: 0; height: 0; z-index: 2;
+  background: #efeadd;
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  box-shadow: -3px -3px 8px rgba(60,50,30,.25);
+  transition: width 300ms var(--ease-out), height 300ms var(--ease-out);
+}
+.desk-card:hover::before, .desk-card:focus-within::before { width: 34px; height: 34px; }
+
+/* Yarn illustration: a short line-drawing reveal, then static. */
+@keyframes ill-draw { to { stroke-dashoffset: 0; } }
+.ill-draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ill-draw 1.6s var(--ease-out) forwards;
+  animation-delay: var(--d, 0s);
+}
+@media (max-width: 767px) { .yarn-illustration .ill-detail { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+  .ill-draw { stroke-dasharray: none; stroke-dashoffset: 0; animation: none; }
 }

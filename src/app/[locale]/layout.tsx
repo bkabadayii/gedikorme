@@ -1,18 +1,21 @@
 import type { Metadata } from "next";
-import { Manrope, Newsreader } from "next/font/google";
+import { Bodoni_Moda, Jost } from "next/font/google";
 import { notFound } from "next/navigation";
 import { getCopy } from "@/content/copy";
 import { htmlLang, isLocale, locales } from "@/lib/i18n/config";
 import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { ClothBackground } from "@/components/ui/cloth-background";
 import "../globals.css";
 
 // Both families ship latin-ext, which carries ğ ü ş ı İ ö ç.
-const display = Newsreader({
-  variable: "--font-newsreader",
+const display = Bodoni_Moda({
+  variable: "--font-bodoni",
   subsets: ["latin", "latin-ext"],
+  style: ["normal", "italic"],
 });
-const sans = Manrope({
-  variable: "--font-manrope",
+const sans = Jost({
+  variable: "--font-jost",
   subsets: ["latin", "latin-ext"],
 });
 
@@ -42,8 +45,10 @@ export default async function LocaleLayout({
   return (
     <html lang={htmlLang[locale]} className={`${display.variable} ${sans.variable}`}>
       <body className="min-h-screen antialiased">
+        <ClothBackground />
         <SiteHeader locale={locale} />
         <main>{children}</main>
+        <SiteFooter locale={locale} />
       </body>
     </html>
   );

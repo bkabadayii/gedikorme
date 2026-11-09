@@ -16,3 +16,13 @@
 ## 2026-11-10 — Hosting and previews
 - workers.dev only. No DNS, nameserver or gedikorme.com changes.
 - PR previews use non-promoted Worker versions (`--no-promote` + `previewUrls`), deployed from GitHub Actions. Dashboard-side Workers Builds is the alternative.
+
+## 2026-11-10 — Phase 1 homepage: draft details to reconfirm
+- Hero shows "EST. 1997" at the owner-side request as a **draft detail**. Must be reconfirmed by the owner before launch (also in `<meta description>`).
+- Hero swatches use procedural knit texture and illustrative names (Ribana · Adaçayı, İnterlok · Kiremit, Süprem · Lacivert), labelled TEMSİLİ ÖRNEK / ILLUSTRATIVE SAMPLE. Not verified Gedik Örme products. Replace with real fabric photography once supplied (public/fabrics/ suggested).
+- Hero secondary CTA is now "Bizimle İletişime Geç / Contact Us"; "Teklif İste" remains in the header, the quote band and the footer.
+
+## 2026-11-10 — Hero illustration and macro fabric placeholders
+- Hero background is an original SVG line drawing ("yarn to fabric": latch needles, yarn guide, loop formation), three compositions in `src/components/home/yarn-illustration.tsx`. Compare with `/tr?illus=a|b|c`; default is `b` (mechanism). Decorative, `aria-hidden`; short CSS stroke reveal, static under `prefers-reduced-motion`.
+- The three card images in `public/fabrics/` (`fabric-{sage,terracotta,navy}-macro.webp` + `-sm.webp`) are **procedural CG renders, not photographs**, made by `scripts/render-fabric-macro.py` (numpy + pillow). No suitable free-licence macro knit photos were found/verified, so none were downloaded. Replace with real catalog photography; filenames and card components can stay the same.
+- Labels on the cards (TEMSİLİ ÖRNEK / ILLUSTRATIVE SAMPLE) must stay until real, verified photography replaces them.
