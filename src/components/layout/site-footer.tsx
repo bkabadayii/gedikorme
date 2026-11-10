@@ -45,7 +45,6 @@ export function SiteFooter({ locale }: { locale: Locale }) {
             <p><a href={`tel:${f.phone.replace(/\s/g, "")}`} className={link}>{f.phone}</a></p>
             <p><a href={`mailto:${f.email}`} className={link}>{f.email}</a></p>
           </address>
-          <p className="mt-4 text-xs text-card/70">{f.addressNote}</p>
         </div>
       </div>
       <div className="border-t border-card/15">

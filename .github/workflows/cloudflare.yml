@@ -68,10 +68,27 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          url=$(grep -oE 'https://[A-Za-z0-9._-]+\.workers\.dev[^ ]*' deploy.log | tail -1 || true)
+          # The CLI does not print the preview URL, so build it from the API:
+          # https://<first 8 chars of version id>-<worker>.<account subdomain>.workers.dev
+          worker=$(sed -nE 's/.*name: "([^"]+)".*/\1/p' cloudflare.config.ts | head -1)
+          api="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers"
+          auth="Authorization: Bearer ${CLOUDFLARE_API_TOKEN}"
+          url=""
+          if [ -z "$url" ]; then
+            sub=$(curl -fsS -H "$auth" "$api/subdomain" | jq -r '.result.subdomain // empty' || true)
+            versions=$(curl -fsS -H "$auth" "$api/scripts/${worker}/versions?per_page=10" || true)
+            # newest version by creation time
+            vid=$(echo "$versions" | jq -r '(.result.items // .result // []) | sort_by(.metadata.created_on // .created_on) | last | .id // empty' || true)
+            if [ -n "$sub" ] && [ -n "$vid" ]; then
+              url="https://${vid%%-*}-${worker}.${sub}.workers.dev"
+            else
+              echo "worker=$worker subdomain=${sub:-<none>} version=${vid:-<none>}"
+              echo "$versions" | jq -c '.errors // .success' || true
+            fi
+          fi
           if [ -n "$url" ]; then
             body="Preview: $url"
           else
-            body="Preview version uploaded. URL not found in deploy output; see the workflow log."
+            body="Preview version uploaded, but its URL could not be determined. Open the Worker's Versions tab in the Cloudflare dashboard (see the workflow log)."
           fi
           gh pr comment "${{ github.event.pull_request.number }}" --body "$body"

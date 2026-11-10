@@ -36,3 +36,9 @@
 - The handoff's opening and closing wordmark scenes are dropped (so are the "1997" frames). Preview-only engine and tweaks panel are not shipped. Copy is in `content/copy` (`film`, `home.film*`); the film follows the page locale.
 - At the owner's request the on-page "representative animation" label was removed. The imagery is plainly drawn (procedural CSS/SVG), not photographic, and still must not be presented as real machinery elsewhere.
 - **Deviation from the handoff:** the last caption ("reaches the world") and rail step "Dünya/World" imply export markets (unconfirmed, plan §2). Shipped as "Oradan sizin adresinize yola çıkar / From there, it heads to your address" and "Sevkiyat / Delivery". Caption 5 ("our store in Zeytinburnu") is still unconfirmed.
+
+## 2026-11-10 — Phase 2 catalog
+- All catalog access goes through `src/content/catalog/repository.ts`; the seed (`seed.ts`) is `status: 'sample'` with no specifications at all, so every spec row reads "Bilgi için ulaşın". Replace the seed to go live with real data.
+- Catalog filtering is server-rendered from query strings (`?q=…&cat=…`) so it works without JS. Spec filters (composition, GSM, application) stay hidden until a fabric has that data (`availableSpecFilters`).
+- Swatches are procedural (CSS), one texture per structure, labelled ÖRNEK/SAMPLE with the demo code. Sample detail pages are `noindex`.
+- Inquiry basket is a localStorage list of fabric ids (key `gedik.inquiry.v1`, max 50, synced across tabs). The RFQ form itself is Phase 3.

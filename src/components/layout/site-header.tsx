@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCopy } from "@/content/copy";
 import type { Locale } from "@/lib/i18n/config";
+import { QuoteLink } from "@/components/layout/quote-link";
 import { localizedPath, type RouteKey } from "@/lib/i18n/routes";
 
 const items: { route: RouteKey; label: "fabrics" | "production" | "about" | "contact" }[] = [
@@ -51,12 +52,11 @@ export function SiteHeader({ locale }: { locale: Locale }) {
           ))}
           <li>{langSwitch}</li>
           <li>
-            <Link
+            <QuoteLink
               href={localizedPath(locale, "requestQuote")}
+              label={copy.nav.quote}
               className="label font-medium text-ink underline decoration-brass underline-offset-8 transition-colors hover:text-brass"
-            >
-              {copy.nav.quote}
-            </Link>
+            />
           </li>
         </ul>
         <details className="group relative ml-auto md:hidden">
@@ -84,12 +84,11 @@ export function SiteHeader({ locale }: { locale: Locale }) {
             ))}
             <li className="py-2">{langSwitch}</li>
             <li className="mt-3 border-t border-line pt-4">
-              <Link
+              <QuoteLink
                 href={localizedPath(locale, "requestQuote")}
+                label={copy.nav.quote}
                 className="label bg-ink px-5 py-3 text-card inline-block"
-              >
-                {copy.nav.quote}
-              </Link>
+              />
             </li>
           </ul>
         </details>
