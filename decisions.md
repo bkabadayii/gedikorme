@@ -30,3 +30,9 @@
 ## 2026-11-10 — About/Production use Pexels stock clips
 - Three Pexels clips (free licence) are transcoded with macOS `avconvert` (no ffmpeg here) to small muted loops in `public/video/`. They play only on screen and not under reduced motion; each sits beside a visible REPRESENTATIVE FOOTAGE / TEMSİLİ GÖRÜNTÜ label stating it is not Gedik Örme's own. Listed in `docs/media-manifest.md`.
 - Only facts from PRODUCT.md appear as About/Production content. Process descriptions are general, labelled as such; machinery, capacity, certifications, lead time, MOQ and export markets show "Bilgi için ulaşın".
+
+## 2026-11-10 — Üretim Filmi on the home page 
+- Ported the design handoff (`docs/Fabric Production Animation.zip`) to `src/components/film/production-film.tsx`. It autoplays on a loop while on screen (no pause button, by the owner's choice; a still frame instead of autoplay under reduced motion). Step buttons (İplik … Sevkiyat) glide the camera to that scene and playback continues; the camera also swings in 3D and tilts slightly with the pointer. A scroll-driven version was tried and rejected by the owner.
+- The handoff's opening and closing wordmark scenes are dropped (so are the "1997" frames). Preview-only engine and tweaks panel are not shipped. Copy is in `content/copy` (`film`, `home.film*`); the film follows the page locale.
+- At the owner's request the on-page "representative animation" label was removed. The imagery is plainly drawn (procedural CSS/SVG), not photographic, and still must not be presented as real machinery elsewhere.
+- **Deviation from the handoff:** the last caption ("reaches the world") and rail step "Dünya/World" imply export markets (unconfirmed, plan §2). Shipped as "Oradan sizin adresinize yola çıkar / From there, it heads to your address" and "Sevkiyat / Delivery". Caption 5 ("our store in Zeytinburnu") is still unconfirmed.

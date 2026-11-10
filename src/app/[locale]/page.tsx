@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ProductionFilm } from "@/components/film/production-film";
 import { SampleDesk } from "@/components/home/sample-desk";
 import { YarnIllustration, type IllustrationVariant } from "@/components/home/yarn-illustration";
 import { getCopy } from "@/content/copy";
@@ -48,6 +49,13 @@ export default async function Home({ params, searchParams }: PageProps<"/[locale
         <div className="relative z-10">
           <SampleDesk cards={cards} note={h.sampleNote} />
         </div>
+      </section>
+
+      <section aria-labelledby="film" className="py-12 md:py-20">
+        <div className="flex flex-wrap items-end justify-between gap-6 pb-8">
+          <h2 id="film" className="font-display text-4xl md:text-5xl">{h.filmTitle}</h2>
+        </div>
+        <ProductionFilm copy={getCopy(locale).film} />
       </section>
 
       <section aria-labelledby="cats" className="py-20 md:py-28">

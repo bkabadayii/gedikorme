@@ -30,6 +30,7 @@ const trCopy = {
       { name: "İnterlok · Kiremit", colour: "#a8574f", spec: "Gramaj: bilgi için ulaşın" },
       { name: "Süprem · Lacivert", colour: "#2f3a4a", spec: "En: bilgi için ulaşın" },
     ],
+    filmTitle: "Kumaşın yolculuğu",
     categoriesTitle: "Kumaşlara göz atın",
     categoriesLead: "Katalog hazırlanırken örnek kategoriler.",
     categories: [
@@ -65,6 +66,22 @@ const trCopy = {
     phone: "+90 541 833 43 28",
     email: "info@gedikorme.com",
     rights: "Tüm hakları saklıdır.",
+  },
+  film: {
+    ariaLabel: "Üretim hattı: iplikten kumaşa, örme, boyama, apre ve sevkiyat. Kendiliğinden oynayan çizim.",
+    railLabel: "Üretim adımları",
+    colour: "Renk",
+    sample: "Örnek",
+    istanbul: "İstanbul",
+    rail: ["İplik", "Örme", "Boyama", "Apre", "Mağaza", "Sevkiyat"],
+    captions: [
+      ["Her şey ", "iplikle", " başlar."],
+      ["Örme makinesinde ", "ilmek ilmek", " kumaşa dönüşür."],
+      ["Boyahanede ", "rengini", " alır."],
+      ["Apre ile ", "son", " halini alır."],
+      ["Zeytinburnu’ndaki ", "mağazamıza", " gelir."],
+      ["Oradan ", "sizin", " adresinize yola çıkar."],
+    ],
   },
   production: {
     title: "Üretim, ilmekten apreye.",

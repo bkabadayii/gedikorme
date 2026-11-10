@@ -32,6 +32,7 @@ export const en: Copy = {
       { name: "Interlock · Brick", colour: "#a8574f", spec: "Weight: contact for details" },
       { name: "Jersey · Navy", colour: "#2f3a4a", spec: "Width: contact for details" },
     ],
+    filmTitle: "A fabric's journey",
     categoriesTitle: "Browse the fabrics",
     categoriesLead: "Sample categories while the catalog is prepared.",
     categories: [
@@ -67,6 +68,22 @@ export const en: Copy = {
     phone: "+90 541 833 43 28",
     email: "info@gedikorme.com",
     rights: "All rights reserved.",
+  },
+  film: {
+    ariaLabel: "Production line: from yarn to fabric, knitting, dyeing, finishing and delivery. A self-playing illustration.",
+    railLabel: "Production steps",
+    colour: "Colour",
+    sample: "Sample",
+    istanbul: "Istanbul",
+    rail: ["Yarn", "Knitting", "Dyeing", "Finishing", "Store", "Delivery"],
+    captions: [
+      ["It all begins with ", "yarn", "."],
+      ["On the knitting machine, it becomes fabric ", "loop by loop", "."],
+      ["In the dyehouse, it takes on its ", "colour", "."],
+      ["Finishing gives it its ", "final", " hand and form."],
+      ["It arrives at our ", "store", " in Zeytinburnu."],
+      ["From there, it heads to ", "your", " address."],
+    ],
   },
   production: {
     title: "Production, from loop to finish.",
