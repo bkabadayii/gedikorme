@@ -28,5 +28,15 @@ Status: `[ ]` open, `[x]` done. Phases follow docs/plan.md §10.
 - [ ] Owner: supply logo, real photos/footage; founding story, team, machinery, capacity, certifications when available
 - [ ] Home film on phones: scene is small at 375; consider a taller crop
 
+## Phase 2 — Catalog and fabric details
+- [x] Typed catalog: `src/content/catalog` (types, 10-item sample seed, repository, tests)
+- [x] Catalog page: search (Turkish-insensitive, both languages), category filter, count, reset, empty state; works without JS (GET form)
+- [x] Fabric detail: localized slugs, spec table with "Bilgi için ulaşın" for unknown values, related fabrics, `noindex` while sample
+- [x] Inquiry basket: localStorage, header count, list with remove/clear on the quote page, direct phone/email
+- [x] Procedural swatches for all 10 fabrics (`.tex-*` in globals.css)
+- [ ] Export/import: `catalog-import-template.csv` and loader (when the owner has data)
+- [ ] hreflang/canonical/sitemap (Phase 4)
+- [ ] Preview check of rewritten detail URLs on the Cloudflare preview (`/tr/kumaslar/suprem`)
+
 ## Later phases
 See docs/plan.md §10.
