@@ -17,7 +17,7 @@ export type Deps = {
 };
 
 const json = (body: unknown, status: number, headers?: Record<string, string>) =>
-  Response.json(body, { status, headers });
+  Response.json(body, { status, headers: { "Cache-Control": "no-store", ...headers } });
 
 /**
  * POST /api/inquiry. Success is returned only after Resend accepts the mail;

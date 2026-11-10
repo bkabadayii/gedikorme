@@ -7,6 +7,7 @@ import type { Fabric } from "@/content/catalog/types";
 import { getCategory, getFabricBySlug, listFabrics, relatedFabrics } from "@/content/catalog/repository";
 import { getCopy } from "@/content/copy";
 import { isLocale, locales } from "@/lib/i18n/config";
+import { pageMeta } from "@/lib/seo";
 import { localizedPath } from "@/lib/i18n/routes";
 
 export function generateStaticParams() {
@@ -18,12 +19,15 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/fabrics/
   if (!isLocale(locale)) return {};
   const f = getFabricBySlug(locale, slug);
   if (!f) return {};
-  return {
+  // Sample pages stay out of search until the catalog is verified (plan §2).
+  return pageMeta({
+    locale,
+    route: "fabrics",
     title: f.name[locale],
     description: f.summary[locale],
-    // Sample pages stay out of search until the catalog is verified (plan §2).
-    robots: f.status === "verified" ? undefined : { index: false, follow: true },
-  };
+    slugs: f.slug,
+    noindex: f.status !== "verified",
+  });
 }
 
 const range = (r: { min?: number; max?: number } | undefined, unit: string) => {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCopy } from "@/content/copy";
 import type { Locale } from "@/lib/i18n/config";
+import { LangSwitch } from "@/components/layout/lang-switch";
 import { QuoteLink } from "@/components/layout/quote-link";
 import { localizedPath, type RouteKey } from "@/lib/i18n/routes";
 
@@ -17,17 +18,7 @@ export function SiteHeader({ locale }: { locale: Locale }) {
   const link = "label transition-colors duration-200 hover:text-brass";
 
   const langSwitch = (
-    <Link
-      href={localizedPath(other, "home")}
-      hrefLang={other}
-      lang={other}
-      aria-label={`${copy.nav.language}: ${other.toUpperCase()}`}
-      className={link}
-    >
-      <span aria-current="true" className="text-brass">{locale.toUpperCase()}</span>
-      <span aria-hidden="true"> / </span>
-      {other.toUpperCase()}
-    </Link>
+    <LangSwitch locale={locale} label={`${locale.toUpperCase()} / ${other.toUpperCase()}, ${copy.nav.language}: ${other.toUpperCase()}`} className={link} />
   );
 
   return (

@@ -5,12 +5,15 @@ import { QuoteSection } from "@/components/inquiry/quote-section";
 import { listFabrics } from "@/content/catalog/repository";
 import { getCopy } from "@/content/copy";
 import { isLocale } from "@/lib/i18n/config";
+import { pageMeta } from "@/lib/seo";
 import { localizedPath } from "@/lib/i18n/routes";
 import { getServerEnv } from "@/lib/server/env";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/request-quote">): Promise<Metadata> {
   const { locale } = await params;
-  return isLocale(locale) ? { title: getCopy(locale).pages.requestQuote } : {};
+  if (!isLocale(locale)) return {};
+  const c = getCopy(locale);
+  return pageMeta({ locale, route: "requestQuote", title: c.pages.requestQuote, description: c.descriptions.requestQuote });
 }
 
 export default async function Page({ params }: PageProps<"/[locale]/request-quote">) {

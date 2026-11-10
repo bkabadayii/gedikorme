@@ -51,3 +51,13 @@
 - KVKK consent wording is DRAFT (`CONSENT_VERSION = kvkk-draft-1`); marked in code/docs only, no on-page badge. The consent timestamp and version go into each email. Owner approval is on the Phase 4 checklist.
 - Errors use ink with a heavier underline and a drawn mark, never colour alone (DESIGN.md "Only Saturation" rule holds).
 - WhatsApp (+90 542 418 77 85, confirmed) links prefill fabric codes and names only.
+
+## 2026-11-10 — Phase 4 (owner-free parts)
+- Canonical origin is `https://gedikorme.com` (no `www`), set in `src/lib/seo.ts`. hreflang uses `tr-TR`, `en` and `x-default` (Turkish). Canonical and sitemap URLs come from the same `localizedPath` map as routing.
+- Indexing is by host: robots.txt and a `noindex` meta apply unless the request host is `gedikorme.com` or `www.gedikorme.com`, so workers.dev and previews stay out of search without a flag.
+- Sample fabric pages stay `noindex` and out of the sitemap; the draft privacy notice is `noindex` and out of the sitemap until approved.
+- Favicon is the logo's "G" mark on stone, generated (`scripts/make-brand-assets.mjs`) together with the two Open Graph images; outputs are committed.
+- Privacy notice paths `/tr/gizlilik`, `/en/privacy`. Consent text no longer names Resend (provider undecided): it says the message may be transferred abroad through an email provider; `CONSENT_VERSION` is `kvkk-draft-2`. DRAFT marking stays in code/docs only.
+- Playwright is a dev dependency; e2e runs against the vinext dev server with the form secrets blanked and `/api/inquiry` mocked per test. The e2e job gates the production deploy.
+- Language switch is a client component mapping the current path (and fabric slug) to the other language.
+- CSP is production-only (React needs eval in dev) and keeps `'unsafe-inline'` for scripts until nonces are practical. Remaining audit items are in `docs/launch-checklist.md`.

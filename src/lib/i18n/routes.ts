@@ -12,6 +12,7 @@ export const routeSegments = {
   about: { tr: "hakkimizda", en: "about" },
   contact: { tr: "iletisim", en: "contact" },
   requestQuote: { tr: "teklif-iste", en: "request-quote" },
+  privacy: { tr: "gizlilik", en: "privacy" },
 } as const satisfies Record<string, Record<Locale, string>>;
 
 export type RouteKey = keyof typeof routeSegments;
@@ -24,6 +25,7 @@ const folders: Record<RouteKey, string> = {
   about: "about",
   contact: "contact",
   requestQuote: "request-quote",
+  privacy: "privacy",
 };
 
 export function localizedPath(locale: Locale, route: RouteKey): string {
@@ -83,4 +85,25 @@ export function legacyRedirects() {
     { source: "/galeri", destination: "/tr/kumaslar", permanent: true },
     { source: "/iletisim", destination: "/tr/iletisim", permanent: true },
   ];
+}
+
+/**
+ * Same page in another language. `/tr/kumaslar/suprem` -> `/en/fabrics/<english slug>`.
+ * `mapSlug` translates a detail slug; without it, or when it cannot, the section index is used.
+ * Unknown paths fall back to the other language's home.
+ */
+export function switchLocalePath(
+  pathname: string,
+  to: Locale,
+  mapSlug?: (route: RouteKey, slug: string, from: Locale, to: Locale) => string | undefined,
+): string {
+  const [, from, segment, slug] = pathname.split("/");
+  if (!(locales as readonly string[]).includes(from)) return localizedPath(to, "home");
+  if (!segment) return localizedPath(to, "home");
+  const route = nested.find((k) => routeSegments[k][from as Locale] === segment || folders[k] === segment);
+  if (!route) return localizedPath(to, "home");
+  const base = localizedPath(to, route);
+  if (!slug) return base;
+  const mapped = mapSlug?.(route, slug, from as Locale, to);
+  return mapped ? `${base}/${mapped}` : base;
 }

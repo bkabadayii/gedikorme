@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { legacyRedirects, localizedPath, localizedRedirects, localizedRewrites } from "./routes";
+import { legacyRedirects, localizedPath, localizedRedirects, localizedRewrites, switchLocalePath } from "./routes";
 
 describe("localizedPath", () => {
   it("maps route keys to locale-prefixed URLs", () => {
@@ -54,5 +54,22 @@ describe("redirects", () => {
 
   it("keeps the old-site URLs alive", () => {
     expect(legacyRedirects().map((r) => r.source)).toEqual(["/hakkimizda", "/galeri", "/iletisim"]);
+  });
+});
+
+describe("switchLocalePath", () => {
+  const mapSlug = (_r: string, slug: string, _f: string, to: string) => (slug === "suprem" ? (to === "en" ? "single-jersey" : "suprem") : undefined);
+  it("keeps the page when switching language", () => {
+    expect(switchLocalePath("/tr/hakkimizda", "en")).toBe("/en/about");
+    expect(switchLocalePath("/en/request-quote", "tr")).toBe("/tr/teklif-iste");
+    expect(switchLocalePath("/tr/gizlilik", "en")).toBe("/en/privacy");
+    expect(switchLocalePath("/tr", "en")).toBe("/en");
+  });
+  it("maps detail slugs, or falls back to the section index", () => {
+    expect(switchLocalePath("/tr/kumaslar/suprem", "en", mapSlug)).toBe("/en/fabrics/single-jersey");
+    expect(switchLocalePath("/tr/kumaslar/bilinmeyen", "en", mapSlug)).toBe("/en/fabrics");
+  });
+  it("falls back to home for unknown paths", () => {
+    expect(switchLocalePath("/xx/foo", "en")).toBe("/en");
   });
 });

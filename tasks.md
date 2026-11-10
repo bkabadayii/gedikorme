@@ -47,10 +47,21 @@ Status: `[ ]` open, `[x]` done. Phases follow docs/plan.md §10.
 - [x] Logs carry outcome and counts only, no personal data
 - [ ] Moved to Phase 5: create the four Worker secrets, then a real email arriving (the Phase 3 exit check)
 - [ ] On the PR preview: forms render, a submit shows the delivery-failed state with phone/email, never success
-- [ ] Add a smoke/e2e test for the RFQ journey (plan §8)
+- [x] Smoke/e2e test for the RFQ journey (Playwright, `npm run e2e`; plan §8)
+
+## Phase 4 — Production readiness (owner-free parts)
+- [x] Metadata: per-page title/description, canonical, hreflang (tr-TR, en, x-default), Open Graph + Twitter card, `metadataBase` `https://gedikorme.com`
+- [x] `sitemap.xml` (sample fabrics excluded), `robots.txt`; only `gedikorme.com` is indexable, workers.dev and previews are noindex
+- [x] Favicon set from the logo's "G" mark, per-language Open Graph images (`scripts/make-brand-assets.mjs`), Organization JSON-LD
+- [x] Draft KVKK privacy notice `/tr/gizlilik`, `/en/privacy` (noindex), linked from the consent checkbox and the footer; consent `kvkk-draft-2`
+- [x] E2E: RFQ journey, failure states, privacy link, language switch, redirects; axe on 16 pages; CI job (gates deploy)
+- [x] Language switch now lands on the same page/fabric in the other language (was always home)
+- [x] Security headers (CSP, nosniff, referrer, permissions, frame), `no-store` on the API, Vite advisory fixed
+- [x] `docs/launch-checklist.md` gathers every open owner item and what engineering left
+- [ ] Owner items: see `docs/launch-checklist.md`
 
 ## Phase 4 launch checklist (additions)
-- [ ] Owner approves the KVKK consent wording (currently `kvkk-draft-1`, marked DRAFT in `src/content/copy/*.ts`) and links the privacy notice
+- [ ] Owner approves the KVKK consent wording (currently `kvkk-draft-2`, marked DRAFT in `src/content/copy/*.ts`) and links the privacy notice
 
 ## Phase 5 launch checklist (additions)
 - [ ] Configure mail delivery and secrets (`RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `INQUIRY_TO`; DEPLOYMENT.md), verified-domain sender with DNS approval, then confirm a real email arrives

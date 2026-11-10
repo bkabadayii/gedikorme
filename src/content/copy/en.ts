@@ -64,6 +64,7 @@ export const en: Copy = {
     contactTitle: "Contact",
     phone: "+90 542 418 77 85",
     email: "info@gedikorme.com",
+    privacy: "Privacy Notice",
     rights: "All rights reserved.",
   },
   catalog: {
@@ -133,7 +134,8 @@ export const en: Copy = {
     itemNote: "Note for this fabric",
     selectedTitle: "Selected fabrics",
     // DRAFT, owner approval pending: KVKK consent wording. Bump CONSENT_VERSION in lib/inquiry/validate.ts when this changes.
-    consent: "I agree that Gedik Örme processes the information I submit (name, email, phone, company and message) to answer my request. I understand that my message is transferred abroad (to the US) through the email provider Resend.",
+    consent: "I agree that Gedik Örme processes the information I submit (name, email, phone, company and message) to answer my request, and that my message may be transferred abroad through an email provider.",
+    privacyLink: "Read the privacy notice",
     consentShort: "Consent",
     submitQuote: "Send Quote Request",
     submitContact: "Send Message",
@@ -225,12 +227,37 @@ export const en: Copy = {
     cta: "Contact Us",
     ctaQuote: "Request a Quote",
   },
+  descriptions: {
+    fabrics: "Gedik Örme knitted-fabric catalog. Browse fabrics and add them to your quote list.",
+    production: "Knitting, dyeing and finishing: how a fabric is made at Gedik Örme.",
+    about: "Gedik Örme, knitted-fabric manufacturer since 1997. Company and contact details.",
+    contact: "Contact Gedik Örme: phone, WhatsApp, email and address.",
+    requestQuote: "Request a quote from Gedik Örme for the fabrics you have selected.",
+    privacy: "Gedik Örme website privacy notice: the personal data our forms collect and your rights.",
+  },
+  // DRAFT, owner/lawyer approval pending: privacy notice (KVKK).
+  // Open items before launch: retention period, legal basis, processors list, VERBIS status.
+  privacy: {
+    title: "Privacy Notice",
+    lead: "How the information you send through the forms on this site is processed, under Turkish Law No. 6698 on the Protection of Personal Data (KVKK).",
+    sections: [
+      { h: "Data controller", p: ["Gedik Örme, Telsiz, Dursun Kılıç Cd No:38, 34020 Zeytinburnu/İstanbul, Türkiye. Phone: +90 542 418 77 85. Email: info@gedikorme.com."] },
+      { h: "Data we process", p: ["The name, email, phone, company, country, estimated quantity, message and selected fabrics you enter in the quote and contact forms.", "When you submit a form, your IP address is processed briefly for the security check and to prevent abuse.", "Your quote list is stored in your browser only; it is not sent to us unless you submit the form."] },
+      { h: "Purpose", p: ["To answer your request, prepare a quote and contact you."] },
+      { h: "Legal basis", p: ["Your explicit consent and pre-contract discussions you request."] },
+      { h: "Transfers", p: ["Your request reaches us through our email provider. Hosting and the security check are provided by Cloudflare. These providers may run servers outside Türkiye, which is why we ask for your explicit consent before you send the form."] },
+      { h: "Retention", p: ["We keep your data for as long as needed to conclude your request and meet legal obligations, then delete or anonymise it."] },
+      { h: "Your rights", p: ["Under KVKK Article 11 you can ask to access your data, have it corrected or deleted, and object to its processing. Write to info@gedikorme.com."] },
+      { h: "Tracking", p: ["This site uses no analytics or advertising tracking."] },
+    ],
+  },
   pages: {
     fabrics: "Fabrics",
     production: "Production",
     about: "About",
     contact: "Contact",
     requestQuote: "Request a Quote",
+    privacy: "Privacy Notice",
     soon: "This page is being prepared.",
   },
 };

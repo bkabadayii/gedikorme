@@ -5,6 +5,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import type { Fabric } from "@/content/catalog/types";
 import type { Copy } from "@/content/copy/tr";
 import type { Locale } from "@/lib/i18n/config";
+import { localizedPath } from "@/lib/i18n/routes";
 import { CONSENT_VERSION, LIMITS, UNITS, type Kind } from "@/lib/inquiry/validate";
 import { useInquiry } from "@/lib/inquiry/store";
 import { Field, ErrorMark, control, controlBorder } from "./field";
@@ -315,6 +316,11 @@ export function InquiryForm({
             <span className="max-w-[62ch] text-base leading-relaxed text-ink/90">{copy.consent}</span>
           </label>
         </div>
+        <p className="mt-2 pl-10 text-sm">
+          <Link href={localizedPath(locale, "privacy")} target="_blank" rel="noopener" className="border-b border-brass-line pb-0.5 transition-colors duration-200 hover:text-brass">
+            {copy.privacyLink}
+          </Link>
+        </p>
         {err("consent") && (
           <p id={`${id("consent")}-error`} className="mt-2 flex gap-2 pl-10 text-sm font-medium text-ink"><ErrorMark /><span>{err("consent")}</span></p>
         )}
