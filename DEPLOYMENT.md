@@ -60,7 +60,7 @@ Verified locally (2026-11-10), on the Workers runtime via `npm run preview`:
 - `POST /api/inquiry`: 400 bad JSON, 422 invalid email/missing field/filled honeypot, 503 `delivery_not_configured` for valid input, GET → 405
 - `npm run lint`, `typecheck`, `test` (10 tests), `build:vinext`, and `deploy:vinext -- --dry-run` pass
 
-**Not verified (needs the account setup above):** an actual deploy, the workers.dev URL, preview-URL generation, and the PR comment step. The comment step scrapes the first `*.workers.dev` URL from the deploy output; confirm it on the first PR and adjust the grep if the output format differs.
+**Not verified (needs the account setup above):** an actual deploy, the workers.dev URL, preview-URL generation, and the PR comment step. The `cf` deploy output does not print the preview URL, so the comment step builds it from the Cloudflare API (newest Worker version id prefix + Worker name + account workers.dev subdomain); the API token needs read access to Workers Scripts to do this.
 
 ## Contact and quotation endpoints
 
