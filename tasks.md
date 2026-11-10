@@ -38,5 +38,22 @@ Status: `[ ]` open, `[x]` done. Phases follow docs/plan.md §10.
 - [ ] hreflang/canonical/sitemap (Phase 4)
 - [ ] Preview check of rewritten detail URLs on the Cloudflare preview (`/tr/kumaslar/suprem`)
 
+## Phase 3 — Inquiry and contact
+- [x] `/api/inquiry`: validation, honeypot (generic 422), Turnstile, rate limit, Resend code; success only after Resend accepts. Delivery itself is not live: without secrets it returns 503 `not_configured` (see decisions.md)
+- [x] Quote page: selected fabrics with per-fabric notes + full RFQ form; Contact page with a shorter form
+- [x] States: field errors with summary, submitting, success with reference, Turnstile/rate-limit/delivery/network failures (form data kept)
+- [x] KVKK consent checkbox (draft wording; mentions the Resend/US transfer)
+- [x] WhatsApp shortcut (prefilled with selected fabric codes/names, no personal data), tel and mailto links
+- [x] Logs carry outcome and counts only, no personal data
+- [ ] Moved to Phase 5: create the four Worker secrets, then a real email arriving (the Phase 3 exit check)
+- [ ] On the PR preview: forms render, a submit shows the delivery-failed state with phone/email, never success
+- [ ] Add a smoke/e2e test for the RFQ journey (plan §8)
+
+## Phase 4 launch checklist (additions)
+- [ ] Owner approves the KVKK consent wording (currently `kvkk-draft-1`, marked DRAFT in `src/content/copy/*.ts`) and links the privacy notice
+
+## Phase 5 launch checklist (additions)
+- [ ] Configure mail delivery and secrets (`RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `INQUIRY_TO`; DEPLOYMENT.md), verified-domain sender with DNS approval, then confirm a real email arrives
+
 ## Later phases
 See docs/plan.md §10.
