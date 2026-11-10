@@ -7,13 +7,14 @@ import type { Fabric } from "@/content/catalog/types";
 import type { Locale } from "@/lib/i18n/config";
 
 export type QuoteCopy = {
+  noteLabel?: string;
   selected: string; selectedOne: string; emptyTitle: string; emptyBody: string; browse: string;
   remove: string; clear: string;
 };
 
 /** The selected fabrics, read from the local basket. Unknown ids are ignored. */
 export function InquiryList({
-  fabrics, locale, copy, swatchAlt, fabricsHref, sampleTag,
+  fabrics, locale, copy, swatchAlt, fabricsHref, sampleTag, notes, onNote,
 }: {
   fabrics: readonly Fabric[];
   locale: Locale;
@@ -21,6 +22,9 @@ export function InquiryList({
   swatchAlt: string;
   fabricsHref: string;
   sampleTag: string;
+  /** Per-fabric notes, owned by the parent so the form can submit them. */
+  notes?: Record<string, string>;
+  onNote?: (id: string, value: string) => void;
 }) {
   const { ids, remove, clear } = useInquiry();
   const picked = ids.map((id) => fabrics.find((f) => f.id === id)).filter((f): f is Fabric => Boolean(f));
@@ -47,19 +51,34 @@ export function InquiryList({
       </div>
       <ul>
         {picked.map((f) => (
-          <li key={f.id} className="grid grid-cols-[4.5rem_1fr_auto] items-center gap-5 border-b border-brass-line/60 py-5 md:grid-cols-[6rem_1fr_auto] md:gap-8">
-            <FabricSwatch fabric={f} label={`${f.name[locale]}: ${swatchAlt}`} className="aspect-square w-full" />
-            <div className="min-w-0">
-              <Link href={`${fabricsHref}/${f.slug[locale]}`} className="font-display text-2xl transition-colors duration-200 hover:text-brass">
-                {f.name[locale]}
-              </Link>
-              <p className="label !text-[0.62rem] !tracking-[0.18em] text-muted">
-                {f.code} <span className="text-brass">· {sampleTag}</span>
-              </p>
+          <li key={f.id} className="border-b border-brass-line/60 py-5">
+            <div className="grid grid-cols-[4.5rem_1fr_auto] items-center gap-5 md:grid-cols-[6rem_1fr_auto] md:gap-8">
+              <FabricSwatch fabric={f} label={`${f.name[locale]}: ${swatchAlt}`} className="aspect-square w-full" />
+              <div className="min-w-0">
+                <Link href={`${fabricsHref}/${f.slug[locale]}`} className="font-display text-2xl transition-colors duration-200 hover:text-brass">
+                  {f.name[locale]}
+                </Link>
+                <p className="label !text-[0.62rem] !tracking-[0.18em] text-muted">
+                  {f.code} <span className="text-brass">· {sampleTag}</span>
+                </p>
+              </div>
+              <button type="button" onClick={() => remove(f.id)} aria-label={`${copy.remove}: ${f.name[locale]}`} className="label border-b border-brass-line pb-1.5 transition-colors duration-200 hover:text-brass">
+                {copy.remove}
+              </button>
             </div>
-            <button type="button" onClick={() => remove(f.id)} aria-label={`${copy.remove}: ${f.name[locale]}`} className="label border-b border-brass-line pb-1.5 transition-colors duration-200 hover:text-brass">
-              {copy.remove}
-            </button>
+            {onNote && copy.noteLabel && (
+              <div className="mt-4 md:pl-[8rem]">
+                <label htmlFor={`note-${f.id}`} className="label !text-[0.62rem] text-muted">{copy.noteLabel}</label>
+                <input
+                  id={`note-${f.id}`}
+                  type="text"
+                  maxLength={500}
+                  value={notes?.[f.id] ?? ""}
+                  onChange={(e) => onNote(f.id, e.target.value)}
+                  className="mt-1 block w-full rounded-none border-0 border-b border-brass-line bg-transparent pb-1.5 text-base focus:border-brass"
+                />
+              </div>
+            )}
           </li>
         ))}
       </ul>

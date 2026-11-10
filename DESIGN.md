@@ -151,6 +151,12 @@ Ivory figure with hairline frame, a pinked knit swatch inset 6.5% (bottom 21%), 
 ### Navigation
 Spaced Didone wordmark left; tracked-caps links right over a brass-line bottom rule; TR / EN switch with the current locale in brass; the quote link is medium weight with a brass underline. Hover goes to brass. Mobile uses a native details disclosure with an ivory panel and an ink quote button.
 
+
+### Forms (inquiry and contact)
+Fields are underlined, not boxed: a tracked-caps label above, display-serif input text, a `brass-line` hairline that becomes `brass` on focus, square corners, and the global 2px brass focus ring stays. Optional fields say "isteğe bağlı / optional" beside the label instead of marking required ones with asterisks. The consent control is a square 24px box with a drawn check; the submit button is the primary ink button.
+
+**Errors never use colour.** Per the Only Saturation Rule, an error is ink text with a drawn circle-exclamation mark, a 2px ink underline on the field, and an ink-ruled summary above the form that takes focus and links to each field. Failure notes (delivery, rate limit, network) use the same ruled block. Success is an ivory card with the double hairline frame and the reference code in italic Didone figures.
+
 ### Footer
 Ink ground, ivory text, wordmark at 1.875rem, brass-line labels, three columns (1.4fr 1fr 1fr), faint ivory top rule for the legal line.
 

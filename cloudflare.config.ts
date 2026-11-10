@@ -17,6 +17,12 @@ export default defineConfig({
     },
     env: {
       ASSETS: bindings.assets(),
+      // RESEND_API_KEY, TURNSTILE_SECRET_KEY, TURNSTILE_SITE_KEY and INQUIRY_TO are deliberately
+      // not declared: a declared secret is required at deploy time, and mail delivery waits for
+      // Phase 5. Once set out-of-band (see DEPLOYMENT.md) they still reach `env` at runtime;
+      // without them /api/inquiry answers 503 not_configured.
+      // At most 5 inquiry submissions per minute per client IP.
+      INQUIRY_LIMITER: bindings.rateLimit({ namespace: "7341", simple: { limit: 5, period: 60 } }),
     },
   }),
 });

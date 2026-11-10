@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { InquiryList } from "@/components/catalog/inquiry-list";
+import { DirectContact } from "@/components/inquiry/direct-contact";
+import { QuoteSection } from "@/components/inquiry/quote-section";
 import { listFabrics } from "@/content/catalog/repository";
 import { getCopy } from "@/content/copy";
 import { isLocale } from "@/lib/i18n/config";
 import { localizedPath } from "@/lib/i18n/routes";
+import { getServerEnv } from "@/lib/server/env";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/request-quote">): Promise<Metadata> {
   const { locale } = await params;
@@ -17,6 +19,7 @@ export default async function Page({ params }: PageProps<"/[locale]/request-quot
   const c = getCopy(locale);
   const t = c.quote;
   const [before, after] = t.title.split(t.titleEmphasis);
+  const { TURNSTILE_SITE_KEY } = await getServerEnv();
 
   return (
     <div className="mx-auto w-full max-w-[90rem] px-6 md:px-12">
@@ -28,27 +31,14 @@ export default async function Page({ params }: PageProps<"/[locale]/request-quot
       </header>
 
       <div className="grid gap-14 pb-10 md:grid-cols-[1.5fr_1fr] md:gap-20">
-        <InquiryList
-          fabrics={listFabrics()}
+        <QuoteSection
           locale={locale}
-          copy={t}
-          swatchAlt={c.catalog.swatchAlt}
+          copy={c}
+          fabrics={listFabrics()}
+          siteKey={TURNSTILE_SITE_KEY ?? ""}
           fabricsHref={localizedPath(locale, "fabrics")}
-          sampleTag={c.catalog.sampleTag}
         />
-        <aside aria-labelledby="direct" className="hairline-frame relative self-start bg-card p-7 shadow-[0_30px_50px_-18px_rgba(60,50,30,.3)] md:p-9">
-          <h2 id="direct" className="font-display text-3xl">{t.directTitle}</h2>
-          <ul className="mt-6 space-y-5">
-            <li>
-              <a href={`tel:${c.footer.phone.replace(/\s/g, "")}`} className="label border-b border-brass-line pb-1.5 transition-colors duration-200 hover:text-brass">{t.call}</a>
-              <p className="mt-2 font-display text-xl">{c.footer.phone}</p>
-            </li>
-            <li>
-              <a href={`mailto:${c.footer.email}`} className="label border-b border-brass-line pb-1.5 transition-colors duration-200 hover:text-brass">{t.email}</a>
-              <p className="mt-2 font-display text-xl">{c.footer.email}</p>
-            </li>
-          </ul>
-        </aside>
+        <DirectContact locale={locale} copy={c} fabrics={listFabrics()} title={t.directTitle} />
       </div>
     </div>
   );

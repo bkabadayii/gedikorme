@@ -75,3 +75,28 @@ Verified locally (2026-11-10), on the Workers runtime via `npm run preview`:
 ## Domain cutover (not part of this work)
 
 Before any nameserver change: export existing DNS, preserve MX/SPF/DKIM/DMARC, add the custom domain to the Worker, verify TLS, then approve the switch separately.
+
+## Inquiry delivery secrets (deferred to Phase 5)
+
+**Status:** mail delivery is not set up yet; it waits for the domain move to Cloudflare (Phase 5). The four secrets below are deliberately **not declared** in `cloudflare.config.ts` (a declared secret is required at deploy time), so preview and production deploys work without them. Until they exist, `/api/inquiry` answers **503 `not_configured`** and the forms show the delivery-failed state with the direct phone/email; it never shows success.
+
+When delivery is set up, the endpoint needs four Worker secrets. Their **values are created out-of-band and never committed**. They still reach `env` at runtime when set in the dashboard or CLI; verify that on the first preview after creating them.
+
+| Secret | Where the value comes from |
+| --- | --- |
+| `RESEND_API_KEY` | resend.com → API Keys → Create API Key (permission: Sending access) |
+| `TURNSTILE_SECRET_KEY` | Cloudflare dashboard → Turnstile → the widget → Secret key |
+| `TURNSTILE_SITE_KEY` | same widget → Site key (public by design, stored the same way) |
+| `INQUIRY_TO` | the email address that should receive inquiries. With Resend's test sender this must be the address your Resend account is registered with |
+
+**Create the Turnstile widget:** Cloudflare dashboard → Turnstile → Add widget. Hostname: `<your-subdomain>.workers.dev` (subdomains, so preview URLs, are covered). Mode: Managed.
+
+**Set the secrets** (either):
+- Dashboard: Workers & Pages → `gedik-orme` → Settings → Variables and Secrets → Add (type Secret), once per name above; or
+- CLI: `npx cf workers secrets update <NAME>` (check `--help` for the script/account flags), and paste the value when prompted.
+
+No GitHub secrets are needed beyond `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+
+**Sender:** `Gedik Örme <onboarding@resend.dev>` (Resend's test sender) until Phase 5. Domain sending needs a verified domain and DNS records, which are not touched before the nameserver switch is approved.
+
+**Rate limit:** `INQUIRY_LIMITER` (config) allows 5 submissions per minute per IP; the endpoint answers 429 beyond that.

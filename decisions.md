@@ -42,3 +42,12 @@
 - Catalog filtering is server-rendered from query strings (`?q=…&cat=…`) so it works without JS. Spec filters (composition, GSM, application) stay hidden until a fabric has that data (`availableSpecFilters`).
 - Swatches are procedural (CSS), one texture per structure, labelled ÖRNEK/SAMPLE with the demo code. Sample detail pages are `noindex`.
 - Inquiry basket is a localStorage list of fabric ids (key `gedik.inquiry.v1`, max 50, synced across tabs). The RFQ form itself is Phase 3.
+
+## 2026-11-10 — Phase 3 inquiry delivery
+- `POST /api/inquiry` (logic in `src/lib/server/inquiry-handler.ts`, route is a thin wrapper): honeypot → config check → rate limit → validation → Turnstile → Resend. Only a Resend 2xx returns `{ok:true, ref}`. A filled honeypot returns a generic 422 that names no field.
+- Secrets (`RESEND_API_KEY`, `TURNSTILE_SECRET_KEY`, `TURNSTILE_SITE_KEY`, `INQUIRY_TO`) are set out-of-band; the recipient address is never in the repo. Rate limit: Workers rate-limit binding, 5 per minute per IP.
+- **Change of plan (same day): no Resend for now.** Email delivery is set up with the domain move to Cloudflare (Phase 5). The four secrets are no longer declared in `cloudflare.config.ts` (`bindings.secret()` has no optional form and a declared secret is required at deploy), so deploys work without them. Without them `/api/inquiry` returns 503 `not_configured` and the forms show the delivery-failed state with direct phone/email; success is never shown. Forms stay as built. The Phase 3 exit check (a real email arriving) moves to Phase 5.
+- Quote requests do not require the message field (contact still does).
+- KVKK consent wording is DRAFT (`CONSENT_VERSION = kvkk-draft-1`); marked in code/docs only, no on-page badge. The consent timestamp and version go into each email. Owner approval is on the Phase 4 checklist.
+- Errors use ink with a heavier underline and a drawn mark, never colour alone (DESIGN.md "Only Saturation" rule holds).
+- WhatsApp (+90 542 418 77 85, confirmed) links prefill fabric codes and names only.
