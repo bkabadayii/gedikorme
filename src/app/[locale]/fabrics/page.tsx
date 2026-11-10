@@ -6,11 +6,14 @@ import { FabricSwatch } from "@/components/catalog/fabric-swatch";
 import { getCategory, listCategories, searchFabrics } from "@/content/catalog/repository";
 import { getCopy } from "@/content/copy";
 import { isLocale } from "@/lib/i18n/config";
+import { pageMeta } from "@/lib/seo";
 import { localizedPath } from "@/lib/i18n/routes";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/fabrics">): Promise<Metadata> {
   const { locale } = await params;
-  return isLocale(locale) ? { title: getCopy(locale).pages.fabrics } : {};
+  if (!isLocale(locale)) return {};
+  const c = getCopy(locale);
+  return pageMeta({ locale, route: "fabrics", title: c.pages.fabrics, description: c.descriptions.fabrics });
 }
 
 const first = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v);

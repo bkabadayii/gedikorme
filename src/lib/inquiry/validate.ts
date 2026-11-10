@@ -1,7 +1,7 @@
 import { locales, type Locale } from "@/lib/i18n/config";
 
 /** Version of the consent wording the visitor accepted (bump when the text changes). */
-export const CONSENT_VERSION = "kvkk-draft-1";
+export const CONSENT_VERSION = "kvkk-draft-2";
 
 export const UNITS = ["kg", "m", "roll", "piece"] as const;
 export type Unit = (typeof UNITS)[number];

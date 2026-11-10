@@ -48,9 +48,10 @@ export function SiteFooter({ locale }: { locale: Locale }) {
         </div>
       </div>
       <div className="border-t border-card/15">
-        <p className="mx-auto max-w-[90rem] px-6 py-6 text-xs text-card/70 md:px-12">
-          © {new Date().getFullYear()} Gedik Örme. {f.rights}
-        </p>
+        <div className="mx-auto flex max-w-[90rem] flex-wrap items-center justify-between gap-x-8 gap-y-2 px-6 py-6 text-xs text-card/70 md:px-12">
+          <p>© {new Date().getFullYear()} Gedik Örme. {f.rights}</p>
+          <Link href={localizedPath(locale, "privacy")} className={link}>{f.privacy}</Link>
+        </div>
       </div>
     </footer>
   );

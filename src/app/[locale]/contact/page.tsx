@@ -5,12 +5,15 @@ import { InquiryForm } from "@/components/inquiry/inquiry-form";
 import { listFabrics } from "@/content/catalog/repository";
 import { getCopy } from "@/content/copy";
 import { isLocale } from "@/lib/i18n/config";
+import { pageMeta } from "@/lib/seo";
 import { localizedPath } from "@/lib/i18n/routes";
 import { getServerEnv } from "@/lib/server/env";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/contact">): Promise<Metadata> {
   const { locale } = await params;
-  return isLocale(locale) ? { title: getCopy(locale).pages.contact } : {};
+  if (!isLocale(locale)) return {};
+  const c = getCopy(locale);
+  return pageMeta({ locale, route: "contact", title: c.pages.contact, description: c.descriptions.contact });
 }
 
 export default async function Page({ params }: PageProps<"/[locale]/contact">) {

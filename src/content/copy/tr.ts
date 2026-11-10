@@ -62,6 +62,7 @@ const trCopy = {
     contactTitle: "İletişim",
     phone: "+90 542 418 77 85",
     email: "info@gedikorme.com",
+    privacy: "Aydınlatma Metni",
     rights: "Tüm hakları saklıdır.",
   },
   catalog: {
@@ -131,7 +132,8 @@ const trCopy = {
     itemNote: "Bu kumaş için not",
     selectedTitle: "Seçtiğiniz kumaşlar",
     // DRAFT, owner approval pending: KVKK consent wording. Bump CONSENT_VERSION in lib/inquiry/validate.ts when this changes.
-    consent: "Gönderdiğim bilgilerin (ad, e-posta, telefon, firma ve mesaj içeriği) talebimi yanıtlamak amacıyla Gedik Örme tarafından işlenmesini kabul ediyorum. İletilerin, e-posta hizmet sağlayıcısı Resend aracılığıyla yurt dışına (ABD) aktarıldığını biliyorum.",
+    consent: "Gönderdiğim bilgilerin (ad, e-posta, telefon, firma ve mesaj içeriği) talebimi yanıtlamak amacıyla Gedik Örme tarafından işlenmesini ve iletilerin e-posta hizmet sağlayıcısı aracılığıyla yurt dışına aktarılabileceğini kabul ediyorum.",
+    privacyLink: "Aydınlatma metnini okuyun",
     consentShort: "Onay",
     submitQuote: "Teklifi Gönder",
     submitContact: "Mesajı Gönder",
@@ -223,12 +225,37 @@ const trCopy = {
     cta: "İletişime Geç",
     ctaQuote: "Teklif İste",
   },
+  descriptions: {
+    fabrics: "Gedik Örme örme kumaş kataloğu. Kumaşları inceleyin, teklif listenize ekleyin.",
+    production: "Örme, boyama ve apre: Gedik Örme'de bir kumaşın üretim yolu.",
+    about: "Gedik Örme, 1997'den beri örme kumaş üretiminde. Kuruluş ve iletişim bilgileri.",
+    contact: "Gedik Örme ile iletişime geçin: telefon, WhatsApp, e-posta ve adres.",
+    requestQuote: "Seçtiğiniz kumaşlar için Gedik Örme'den teklif isteyin.",
+    privacy: "Gedik Örme web sitesi aydınlatma metni: formlarda toplanan kişisel veriler ve haklarınız.",
+  },
+  // DRAFT, owner/lawyer approval pending: KVKK aydınlatma metni.
+  // Open items before launch: retention period, legal basis (m.5), processors list, VERBIS status.
+  privacy: {
+    title: "Aydınlatma Metni",
+    lead: "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında, bu sitedeki formlar aracılığıyla ilettiğiniz bilgilerin nasıl işlendiğini anlatır.",
+    sections: [
+      { h: "Veri sorumlusu", p: ["Gedik Örme, Telsiz, Dursun Kılıç Cd No:38, 34020 Zeytinburnu/İstanbul. Telefon: +90 542 418 77 85. E-posta: info@gedikorme.com."] },
+      { h: "İşlenen veriler", p: ["Teklif ve iletişim formlarına yazdığınız ad, e-posta, telefon, firma, ülke, tahmini miktar, mesaj ve seçtiğiniz kumaşlar.", "Formu gönderirken güvenlik doğrulaması ve kötüye kullanımı önleme için IP adresiniz geçici olarak işlenir.", "Teklif listeniz yalnızca tarayıcınızda saklanır; formu göndermediğiniz sürece bize iletilmez."] },
+      { h: "Amaç", p: ["Talebinizi yanıtlamak, teklif hazırlamak ve sizinle iletişim kurmak."] },
+      { h: "Hukuki sebep", p: ["Açık rızanız ve talebiniz üzerine yürütülen ön görüşme."] },
+      { h: "Aktarım", p: ["Talebiniz, e-posta hizmet sağlayıcımız aracılığıyla bize iletilir. Sitenin barındırılması ve güvenlik doğrulaması Cloudflare tarafından sağlanır. Bu hizmet sağlayıcıların sunucuları yurt dışında olabilir; bu nedenle formu göndermeden önce açık rıza onayı istenir."] },
+      { h: "Saklama", p: ["Verileriniz, talebinizin sonuçlanması ve yasal yükümlülükler için gereken süre boyunca saklanır; ardından silinir veya anonim hale getirilir."] },
+      { h: "Haklarınız", p: ["KVKK madde 11 uyarınca verilerinize erişebilir, düzeltilmesini veya silinmesini isteyebilir, işlemeye itiraz edebilirsiniz. Başvuru için info@gedikorme.com adresine yazın."] },
+      { h: "İzleme", p: ["Sitede analitik veya reklam amaçlı izleme kullanılmaz."] },
+    ],
+  },
   pages: {
     fabrics: "Kumaşlar",
     production: "Üretim",
     about: "Hakkımızda",
     contact: "İletişim",
     requestQuote: "Teklif İste",
+    privacy: "Aydınlatma Metni",
     soon: "Bu sayfa hazırlanıyor.",
   },
 } as const;

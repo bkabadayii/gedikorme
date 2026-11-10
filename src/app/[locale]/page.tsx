@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductionFilm } from "@/components/film/production-film";
@@ -5,12 +6,19 @@ import { SampleDesk } from "@/components/home/sample-desk";
 import { YarnIllustration, type IllustrationVariant } from "@/components/home/yarn-illustration";
 import { getCopy } from "@/content/copy";
 import { isLocale } from "@/lib/i18n/config";
+import { pageMeta } from "@/lib/seo";
 import { localizedPath } from "@/lib/i18n/routes";
 
 const primary =
   "label inline-block bg-ink px-8 py-5 text-card transition-colors duration-200 hover:bg-brass";
 const secondary =
   "label inline-block border-b border-brass-line pb-1.5 transition-colors duration-200 hover:text-brass";
+
+export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
+  return pageMeta({ locale, route: "home", description: getCopy(locale).meta.description });
+}
 
 export default async function Home({ params, searchParams }: PageProps<"/[locale]">) {
   const { locale } = await params;

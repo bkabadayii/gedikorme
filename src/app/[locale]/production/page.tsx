@@ -4,11 +4,14 @@ import { notFound } from "next/navigation";
 import { RepresentativeVideo } from "@/components/media/representative-video";
 import { getCopy } from "@/content/copy";
 import { isLocale } from "@/lib/i18n/config";
+import { pageMeta } from "@/lib/seo";
 import { localizedPath } from "@/lib/i18n/routes";
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/production">): Promise<Metadata> {
   const { locale } = await params;
-  return isLocale(locale) ? { title: getCopy(locale).pages.production } : {};
+  if (!isLocale(locale)) return {};
+  const c = getCopy(locale);
+  return pageMeta({ locale, route: "production", title: c.pages.production, description: c.descriptions.production });
 }
 
 export default async function Page({ params }: PageProps<"/[locale]/production">) {

@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 
 /** Muted looping clip that plays only while on screen and never under reduced
- *  motion (poster stays). Every use sits beside a visible "representative" label;
- *  the clips are stock footage, not Gedik Örme's own. See docs/media-manifest.md. */
+ *  motion (poster stays). The clips are stock footage until Gedik Örme's own
+ *  exists; see docs/media-manifest.md. */
 export function RepresentativeVideo({
   src,
   poster,

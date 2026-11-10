@@ -1,6 +1,6 @@
 # Media replacement manifest
 
-Everything below is **representative**, not Gedik Örme's own. Each use is labelled on the page. Replace with owner-supplied footage/photos, then delete the row.
+Everything below is **representative**, not Gedik Örme's own. Replace with owner-supplied footage/photos, then delete the row.
 
 | File | Where | What it is | Source (Pexels licence, no attribution required) |
 | --- | --- | --- | --- |

@@ -24,6 +24,19 @@ jobs:
       - run: npm run test
       - run: npm run build:vinext
 
+  # Browser journeys (RFQ in TR/EN, language switch, redirects) against the dev server.
+  e2e:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run e2e
+
   # main -> production Worker (workers.dev). Needs the two repository secrets.
   deploy:
     needs: check
@@ -45,7 +58,7 @@ jobs:
   # PRs from this repo -> uploaded as a non-promoted Worker version, reachable
   # at its preview URL; production traffic is untouched. Fork PRs get no secrets.
   preview:
-    needs: check
+    needs: [check, e2e]
     if: >-
       github.event_name == 'pull_request' &&
       github.event.pull_request.head.repo.full_name == github.repository
