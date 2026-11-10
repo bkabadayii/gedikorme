@@ -14,10 +14,16 @@ Status: `[ ]` open, `[x]` done. Phases follow docs/plan.md §10.
 - [x] DEPLOYMENT.md
 - [ ] Owner: create Cloudflare API token, add GitHub secrets (see DEPLOYMENT.md)
 - [ ] First real deploy to workers.dev and PR-preview check
-- [ ] First commit and push (not done yet, by request)
+- [x] First commit (push still pending)
 
 ## Phase 1 — Brand experience and homepage
-- [ ] Not started. Run `impeccable` for header/footer/home; then record DESIGN.md.
+- [x] Header/footer, Numune Masası homepage, DESIGN.md recorded
+- [x] About page: verified-only facts ledger, representative stock clips, story slot as TODO
+- [x] Production page: knitting → dyeing → finishing, unconfirmed specs as "Bilgi için ulaşın" rows
+- [x] All generated/stock imagery labelled representative; `docs/media-manifest.md` lists replacements
+- [ ] Owner: reconfirm 1997, addresses, phone, email; supply logo, real photos/footage
+- [ ] Owner: founding story, team, machinery, capacity, certifications (About/Production TODOs)
+- [ ] Mobile visual pass on About/Production at real device width
 
 ## Later phases
 See docs/plan.md §10.

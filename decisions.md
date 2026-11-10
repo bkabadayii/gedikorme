@@ -26,3 +26,7 @@
 - Hero background is an original SVG line drawing ("yarn to fabric": latch needles, yarn guide, loop formation), three compositions in `src/components/home/yarn-illustration.tsx`. Compare with `/tr?illus=a|b|c`; default is `b` (mechanism). Decorative, `aria-hidden`; short CSS stroke reveal, static under `prefers-reduced-motion`.
 - The three card images in `public/fabrics/` (`fabric-{sage,terracotta,navy}-macro.webp` + `-sm.webp`) are **procedural CG renders, not photographs**, made by `scripts/render-fabric-macro.py` (numpy + pillow). No suitable free-licence macro knit photos were found/verified, so none were downloaded. Replace with real catalog photography; filenames and card components can stay the same.
 - Labels on the cards (TEMSİLİ ÖRNEK / ILLUSTRATIVE SAMPLE) must stay until real, verified photography replaces them.
+
+## 2026-11-10 — About/Production use Pexels stock clips
+- Three Pexels clips (free licence) are transcoded with macOS `avconvert` (no ffmpeg here) to small muted loops in `public/video/`. They play only on screen and not under reduced motion; each sits beside a visible REPRESENTATIVE FOOTAGE / TEMSİLİ GÖRÜNTÜ label stating it is not Gedik Örme's own. Listed in `docs/media-manifest.md`.
+- Only facts from PRODUCT.md appear as About/Production content. Process descriptions are general, labelled as such; machinery, capacity, certifications, lead time, MOQ and export markets show "Bilgi için ulaşın".
