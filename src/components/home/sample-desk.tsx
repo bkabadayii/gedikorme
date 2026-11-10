@@ -7,7 +7,7 @@ export type DeskCard = { name: string; colour: string; spec: string; sampleLabel
 /** Three ivory sample cards in real CSS perspective. They tilt toward the pointer
  *  and the hovered card lifts; reduced motion keeps them still. All swatches are
  *  representative colours, labelled as sample content. */
-export function SampleDesk({ cards, note }: { cards: DeskCard[]; note: string }) {
+export function SampleDesk({ cards }: { cards: DeskCard[] }) {
   const root = useRef<HTMLDivElement>(null);
 
   const onMove = (e: React.PointerEvent) => {
@@ -70,7 +70,6 @@ export function SampleDesk({ cards, note }: { cards: DeskCard[]; note: string })
           </figure>
         ))}
       </div>
-      <p className="mt-3 text-xs tracking-wide text-ink/85">{note}</p>
     </div>
   );
 }

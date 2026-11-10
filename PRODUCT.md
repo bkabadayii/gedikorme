@@ -45,7 +45,7 @@ An established, real knitted-fabric manufacturer (knitting, dyeing, finishing) p
 
 ## Brand Commitments
 
-- Name: Gedik Örme. Established 1997 (reconfirm before launch).
+- Name: Gedik Örme. Established 1997 (confirmed).
 - Voice: specific, grounded, human; explain what a fabric or process means to a buyer. No "revolutionizing textiles", "world-class", "cutting-edge" or unverifiable "best quality". CTAs such as `Kumaşları İncele / Explore Fabrics`, `Teklif İste / Request a Quote`, `İletişime Geç / Contact Us`.
 - Brand keywords from the plan: tactile, precise, established, understated, warm, human, confident, modern, editorial, practical.
 - A logo file exists and will be supplied by the owner.
@@ -53,7 +53,7 @@ An established, real knitted-fabric manufacturer (knitting, dyeing, finishing) p
 
 ## Evidence on Hand
 
-- Public facts from the current site (reviewed 2026-11-10): founded 1997; knitting, dyeing and finishing (apre); sales presence in Zeytinburnu, Istanbul. Contact page lists Merkez: Telsiz Mah., Karanfil Sok. No:26, Zeytinburnu; Şube: Telsiz Mah., Menekşe Sok. No:15/A, Zeytinburnu; phone +90 541 833 43 28; email info@gedikorme.com. All to be reconfirmed by the owner before launch.
+- Confirmed by the owner (2026-11-10): founded 1997; knitting, dyeing and finishing (apre); a single address, Telsiz, Dursun Kılıç Cd No:38, 34020 Zeytinburnu/İstanbul; phone 0542 418 77 85 (+90 542 418 77 85); email info@gedikorme.com. The old Merkez/Şube addresses and the +90 541 833 43 28 number are retired.
 - Logo file: promised, not yet in the repo.
 - Absent, must not be fabricated: original fabric, machine and premises photography (owner says it exists or is coming; unverified), verified fabric specs, certifications, client logos, testimonials, statistics. The current site's "international quality standards" line does not substantiate a named certification.
 

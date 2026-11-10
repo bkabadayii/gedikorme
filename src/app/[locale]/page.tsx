@@ -47,7 +47,7 @@ export default async function Home({ params, searchParams }: PageProps<"/[locale
           </p>
         </div>
         <div className="relative z-10">
-          <SampleDesk cards={cards} note={h.sampleNote} />
+          <SampleDesk cards={cards} />
         </div>
       </section>
 
@@ -114,7 +114,6 @@ export default async function Home({ params, searchParams }: PageProps<"/[locale
       <section aria-labelledby="story" className="mx-auto max-w-2xl py-24 text-center md:py-32">
         <h2 id="story" className="font-display text-4xl md:text-5xl">{h.storyTitle}</h2>
         <p className="mt-6 text-lg leading-relaxed text-muted">{h.storyBody}</p>
-        <p className="mt-3 text-xs text-muted">{h.storyNote}</p>
         <Link href={localizedPath(locale, "about")} className={`${secondary} mt-8`}>
           {h.storyCta}
         </Link>

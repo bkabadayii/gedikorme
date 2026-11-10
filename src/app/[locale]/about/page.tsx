@@ -26,18 +26,17 @@ export default async function Page({ params }: PageProps<"/[locale]/about">) {
   return (
     <div className="mx-auto w-full max-w-[90rem] px-6 md:px-12">
       <section className="grid items-start gap-12 py-14 md:grid-cols-[1.1fr_1fr] md:gap-16 md:py-20">
-        <div>
-          <h1 className="text-balance font-display text-5xl leading-[1.04] md:text-[4.5rem]">
+        <div className="min-w-0">
+          <h1 className="text-balance font-display text-4xl leading-[1.06] sm:text-5xl md:text-[4.5rem] md:leading-[1.04]">
             {before}
             <em>{a.titleEmphasis}</em>
             {after}
           </h1>
           <p className="mt-8 max-w-[44ch] text-lg leading-relaxed text-ink/80">{a.lead}</p>
-          <p className="mt-3 text-xs text-muted">{a.foundedDraft}</p>
         </div>
 
-        {/* TODO(owner): replace with Gedik Örme fabric and workshop footage; see docs/media-manifest.md */}
-        <div>
+        {/* Stock clips until our own fabric footage exists; see docs/media-manifest.md */}
+        <div className="min-w-0">
           <div className="grid grid-cols-2 items-start gap-5 md:gap-8">
             {clips.map((c, i) => (
               <figure key={c.src} className={`hairline-frame relative bg-card p-2.5 shadow-[0_30px_50px_-18px_rgba(60,50,30,.35)] ${c.cls}`}>
@@ -48,21 +47,14 @@ export default async function Page({ params }: PageProps<"/[locale]/about">) {
                     alt={a.clothAlt[i]}
                   />
                 </div>
-                <figcaption className="label !text-[0.6rem] !tracking-[0.18em] px-1 pb-1 pt-3 text-brass md:!text-[0.68rem]">
-                  {a.videoLabel}
-                </figcaption>
               </figure>
             ))}
           </div>
-          <p className="mt-8 max-w-[40ch] text-sm text-muted md:mt-6">{a.videoNote}</p>
         </div>
       </section>
 
       <section aria-labelledby="facts" className="grid gap-8 py-16 md:grid-cols-[1fr_2fr] md:gap-12 md:py-24">
-        <div>
-          <h2 id="facts" className="font-display text-4xl md:text-5xl">{a.factsTitle}</h2>
-          <p className="mt-4 max-w-[30ch] text-sm text-muted">{a.factsNote}</p>
-        </div>
+        <h2 id="facts" className="font-display text-4xl md:text-5xl">{a.factsTitle}</h2>
         <dl className="border-t border-brass-line">
           {a.facts.map((f) => (
             <div key={f.k} className="grid gap-1 border-b border-brass-line/60 py-5 sm:grid-cols-[10rem_1fr] sm:gap-8">
@@ -71,14 +63,6 @@ export default async function Page({ params }: PageProps<"/[locale]/about">) {
             </div>
           ))}
         </dl>
-      </section>
-
-      <section aria-labelledby="story" className="bg-card/90 px-6 py-14 md:px-16 md:py-20">
-        <div className="grid gap-6 md:grid-cols-[1fr_2fr] md:gap-12">
-          <h2 id="story" className="font-display text-3xl md:text-4xl">{a.storyTitle}</h2>
-          {/* TODO(owner): founding story, team, values. Do not draft invented history. */}
-          <p className="max-w-[52ch] italic leading-relaxed text-muted">{a.storyPending}</p>
-        </div>
       </section>
 
       <section aria-labelledby="acta" className="mx-auto max-w-3xl py-24 text-center md:py-32">
